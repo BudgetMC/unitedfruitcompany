@@ -13,7 +13,7 @@
     "@react-spring/web": "^9.7.4",
     "html-entities": "^2.5.2",
     "next": "^14.2.7",
-    "next-usequerystate": "^1.18.0",
+    "next-usequerystate": "^1.19.3",
     "react": "18.3.1",
     "react-bootstrap-icons": "^1.11.4",
     "react-dom": "18.3.1",
