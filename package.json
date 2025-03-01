@@ -15,7 +15,7 @@
   "dependencies": {
     "@react-spring/web": "^9.7.5",
     "html-entities": "^2.5.2",
-    "next": "^15.1.6",
+    "next": "^15.2.0",
     "nuqs": "^2.4.0",
     "react": "19.0.0",
     "react-bootstrap-icons": "^1.11.5",
