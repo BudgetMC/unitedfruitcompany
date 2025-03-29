@@ -2,40 +2,57 @@ import TypeWriterScript from "../../components/TypewriterScript";
 import BibliographyCard from "../BibliographyCard";
 import Container from "../Container";
 import { Post } from "../../lib/types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import FilterOptions from "./FilterOptions";
-import { motion } from "framer-motion";
 import styles from "./Bibliography.module.css";
-import React from "react";
 
 interface Props {
   items: Post[];
 }
 
 const Bibliography: React.FC<Props> = ({ items }) => {
-  const [itemsToShow, setItemsToShow] = useState(items);
   const [filter, setFilter] = useState<null | string>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const itemsToShow = useMemo(() => {
     if (filter) {
       // Some special handling for the different words people might use for a image. I'm doing this so people don't have
       // to remember which specific term to use when adding bibliography items.
       if (filter === "picture") {
-        setItemsToShow(
-          items.filter(
+        return items.filter(
             (item) =>
               item.tags.labelTags.includes("picture") ||
               item.tags.labelTags.includes("image") ||
               item.tags.labelTags.includes("photo")
-          )
-        );
+          );
       } else {
-        setItemsToShow(items.filter((item) => item.tags.labelTags.includes(filter)));
+        return items.filter((item) => item.tags.labelTags.includes(filter));
       }
     } else {
-      setItemsToShow(items);
+      return items;
     }
-  }, [filter, items]);
+  }, [filter, items])
+
+  // Run the tail animation when the list changes
+  useEffect(() => {
+    if (containerRef.current) {
+      const elements = containerRef.current.children;
+      Array.from(elements).forEach((el, index) => {
+        el.animate(
+          [
+            { opacity: 0, transform: "translateY(-20px)" },
+            { opacity: 1, transform: "translateY(0)" }
+          ],
+          {
+            duration: 500,
+            easing: "ease-out",
+            delay: index * 100,
+            fill: "backwards"
+          }
+        );
+      });
+    }
+  }, [itemsToShow]);
 
   return (
     <Container>
@@ -47,20 +64,15 @@ const Bibliography: React.FC<Props> = ({ items }) => {
         couldn&apos;t secure the rights to reproduce.
       </p>
       <FilterOptions filter={filter} setFilter={setFilter} />
-      <div className={styles.postList}>
-        <React.Fragment key={itemsToShow.length}>
-          {itemsToShow.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }} 
-              transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
-            >
-              <BibliographyCard item={item} />
-            </motion.div>
-          ))}
-        </React.Fragment>
+      <div
+        className={styles.postList}
+        ref={containerRef}
+      >
+        {itemsToShow.map((item, index) => (
+          <div key={index} className={styles.animatedItem}>
+            <BibliographyCard item={item} />
+          </div>
+        ))}
       </div>
     </Container>
   );

@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "html-entities": "^2.5.5",
-    "motion": "^12.6.2",
     "next": "^15.2.4",
     "nuqs": "^2.4.1",
     "react": "19.1.0",

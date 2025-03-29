@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useRef, useMemo } from "react";
 import { ListedPost } from "../../lib/types";
-import styles from './TimelineHeader.module.css';
+import styles from "./TimelineHeader.module.css";
 
 interface Props {
   post: ListedPost;
@@ -10,30 +9,43 @@ interface Props {
 }
 
 const TimelineHeader: React.FC<Props> = ({ post, activePost, children }) => {
-  const [isActive, setIsActive] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const lines = React.Children.toArray(children);
 
+  const isActive = useMemo(
+    () => post.title === activePost.title,
+    [post.title, activePost]
+  )
+
   useEffect(() => {
-    setIsActive(post.title === activePost.title);
-  }, [activePost, post.title]);
+    if (containerRef.current && isActive) {
+      const elements = containerRef.current.children;
+      Array.from(elements).forEach((el, index) => {
+        el.animate(
+          [
+            { opacity: 0, transform: "translateY(-10px)" },
+            { opacity: 1, transform: "translateY(0)" }
+          ],
+          {
+            duration: 500,
+            easing: "ease-in-out",
+            delay: index * 100,
+            fill: "backwards"
+          }
+        );
+      });
+    }
+  }, [isActive]);
 
   return (
-    <>
-      <AnimatePresence>
-        {isActive &&
-          lines.map((line, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1, ease: "easeInOut" }}
-            >
-              <span className={styles.header}>{line}</span>
-            </motion.div>
-          ))}
-      </AnimatePresence>
-    </>
+    <div ref={containerRef}>
+      {isActive &&
+        lines.map((line, index) => (
+          <span key={index} className={styles.header}>
+            {line}
+          </span>
+        ))}
+    </div>
   );
 };
 
