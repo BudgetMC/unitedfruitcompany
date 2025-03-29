@@ -2,7 +2,8 @@ import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import TagDisplay from "./TagDisplay";
 import { X } from "react-bootstrap-icons";
 import { Pane, Content, Label, Input, ResetButton } from "./styles";
-import { DesktopTags, MobileTags } from "./TagDisplay.styles";
+import styles from './TagDisplay.module.css';
+
 import { useQueryState } from "nuqs";
 
 interface Props {
@@ -65,22 +66,22 @@ const PaneContent: React.FC<Props> = ({ tags }) => {
               {handleResetButton()}
             </Label>
           </form>
-          <DesktopTags>
+          <div className={styles.desktopTags}>
             <TagDisplay
               tags={tags}
               defaultTagDisplay={true}
               setQuery={setQuery}
               setSearchValue={setSearchValue}
             />
-          </DesktopTags>
-          <MobileTags>
+          </div>
+          <div className={styles.mobileTags}>
             <TagDisplay
               tags={tags}
               defaultTagDisplay={false}
               setQuery={setQuery}
               setSearchValue={setSearchValue}
             />
-          </MobileTags>
+          </div>
         </Content>
       </Pane>
     </>

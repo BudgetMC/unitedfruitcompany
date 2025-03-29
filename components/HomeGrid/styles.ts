@@ -22,7 +22,7 @@ export const ItemContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ theme }) => theme.colors.primary};
+  color: var(--primary);
   filter: grayscale(1);
   border-radius: 5px;
   transition: filter 0.2s;

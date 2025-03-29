@@ -1,21 +1,20 @@
 import styled from "styled-components";
-import { alegreyaSans } from "../../styles/fonts";
 
 export const NavDiv = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: ${({ theme }) => theme.navbar.height};
+  height: var(--navHeight);
   z-index: 10000;
   background: ${(props) => props.color};
-  color: ${({ theme }) => theme.colors.primary};
+  color: var(--primary);
   box-shadow: 0 1px 2px black;
-  font-family: ${alegreyaSans.style.fontFamily};
+  font-family: "Alegreya Sans";
 
   a:hover {
     background: none;
-    color: ${({ theme }) => theme.colors.secondary};
+    color: var(--secondary);
   }
 
   img {
@@ -66,7 +65,7 @@ export const DropdownToggle = styled.div`
 export const MobileDropdown = styled.div`
   display: none;
   position: absolute;
-  top: ${({ theme }) => theme.navbar.height};
+  top: var(--navHeight);
   left: 0;
   margin: auto;
   width: 100%;

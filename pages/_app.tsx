@@ -1,13 +1,12 @@
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyle, theme } from "../styles/GlobalStyle";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NavOffset from "../components/NavOffset";
 import { NuqsAdapter } from "nuqs/adapters/next/pages";
+import '../styles/global.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV === "production" && typeof window !== 'undefined') {
     console.log(`
             Hungry? Grab a banana!
   
@@ -30,14 +29,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <NuqsAdapter>
-          <GlobalStyle />
-          <Navbar />
-          <NavOffset child={<Component {...pageProps} />} />
-          <Footer />
-        </NuqsAdapter>
-      </ThemeProvider>
+      <NuqsAdapter>
+        <Navbar />
+        <NavOffset child={<Component {...pageProps} />} />
+        <Footer />
+      </NuqsAdapter>
     </>
   );
 }

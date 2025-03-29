@@ -50,6 +50,9 @@ class MyDocument extends Document {
             name="msvalidate.01"
             content="05C20B864F39C5927EDE879C9B069800"
           />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='anonymous' />
+          <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@500&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Special+Elite&display=swap" rel="stylesheet"></link>
         </Head>
         <body>
           <Main />

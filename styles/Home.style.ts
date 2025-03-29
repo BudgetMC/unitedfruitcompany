@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { specialElite } from "./fonts";
 
 export const Main = styled.main`
-  color: ${({ theme }) => theme.colors.primary};
+  color: var(--primary);
 `;
 
 export const MainContent = styled.div`
@@ -14,10 +13,10 @@ export const MainContent = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding: 4rem 0;
-  font-family: ${specialElite.style.fontFamily};
+  font-family: "Special Elite";
   z-index: 1;
   margin: auto;
-  color: ${({ theme }) => theme.colors.primary};
+  color: var(--primary);
 
   &::before {
     position: absolute;
@@ -36,7 +35,7 @@ export const MainContent = styled.div`
 
 // Keeps the content from overlapping with the navbar.
 export const NavbarPlaceholder = styled.div`
-  height: ${({ theme }) => theme.navbar.height};
+  height: var(--navHeight);
 `;
 
 export const Title = styled.h1`

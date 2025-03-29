@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import { alegreyaSans } from "../../styles/fonts";
 
 export const Pane = styled.div`
-  background: ${({ theme }) => theme.colors.darkBackground};
+  background: var(--darkBackground);
   margin-top: 115px;
   border-radius: 10px;
-  font-family: ${alegreyaSans.style.fontFamily};
+  font-family: "Alegreya Sans";
   color: white;
-  box-shadow: ${({ theme }) => theme.shadow};
+  box-shadow: var(--shadow);
 `;
 
 export const Content = styled.div`

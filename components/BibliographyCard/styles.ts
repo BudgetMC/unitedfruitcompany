@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 export const Box = styled.div`
-  background: ${({ theme }) => theme.colors.secondary};
+  background: var(--secondary);
   padding: 16px;
   border-radius: 5px;
-  box-shadow: ${({ theme }) => theme.shadow};
+  box-shadow: var(--shadow);
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr 15fr;

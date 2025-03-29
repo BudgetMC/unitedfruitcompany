@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { alegreyaSans } from "../../styles/fonts";
 
 export const Container = styled.div`
-  height: calc(100vh - ${({ theme }) => theme.navbar.height});
+  height: calc(100vh - var(--navHeight));
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -28,7 +27,7 @@ export const SeeMoreButton = styled.button`
   align-items: center;
   gap: 10px;
   color: white;
-  font-family: ${alegreyaSans.style.fontFamily};
+  font-family: "Alegreya Sans";
 
   &:hover,
   &:focus {

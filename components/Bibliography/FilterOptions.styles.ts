@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 export const Menu = styled.div`
   padding: 10px;
-  background: ${({ theme }) => theme.colors.secondary};
+  background: var(--secondary);
   border-radius: 5px;
   max-width: 480px;
   margin: auto auto 40px auto;
-  box-shadow: ${({ theme }) => theme.shadow};
+  box-shadow: var(--shadow);
   display: flex;
   flex-wrap: wrap;
   gap: 10px;

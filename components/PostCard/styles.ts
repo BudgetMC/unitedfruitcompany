@@ -15,8 +15,8 @@ export const Card = styled.div`
   height: 280px;
   width: 220px;
   border-radius: 20px;
-  box-shadow: ${({ theme }) => theme.shadow};
-  background: ${({ theme }) => theme.colors.secondary};
+  box-shadow: var(--shadow);
+  background: var(--secondary);
   transition: transform 0.3s;
   text-align: center;
   overflow: hidden;

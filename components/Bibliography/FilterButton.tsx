@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Button = styled.button<{ selected: boolean }>`
-  background: ${({ theme }) => theme.colors.thirdary};
+  background: var(--thirdary);
   border: none;
   padding: 6px;
   display: flex;
@@ -18,7 +18,7 @@ const Button = styled.button<{ selected: boolean }>`
   font-size: 1rem;
   border-radius: 3px;
   ${(props) =>
-    props.selected ? `background: ${props.theme.colors.darkBackground};` : ""}
+    props.selected ? `background: var(--darkBackground);` : ""}
   ${(props) => (props.selected ? "color: white;" : "")}
 
   &:hover {

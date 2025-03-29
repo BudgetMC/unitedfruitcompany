@@ -12,11 +12,11 @@ export const Container = styled.div`
 export const Button = styled.button`
   height: 40px;
   width: 40px;
-  background: ${({ theme }) => theme.colors.secondary};
-  border: 1px solid ${({ theme }) => theme.colors.darkBackground};
+  background: var(--secondary);
+  border: 1px solid var(--darkBackground);
   border-radius: 10px;
   transition: filter 0.2s;
-  box-shadow: ${({ theme }) => theme.shadow};
+  box-shadow: var(--shadow);
 
   &:hover,
   &:focus {

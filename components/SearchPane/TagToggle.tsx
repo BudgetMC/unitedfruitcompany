@@ -1,5 +1,5 @@
 import { CaretDownFill, CaretUpFill } from "react-bootstrap-icons";
-import { ToggleButton } from "./TagDisplay.styles";
+import styles from './TagDisplay.module.css';
 
 interface Props {
   display: boolean;
@@ -14,7 +14,14 @@ const TagToggle: React.FC<Props> = ({ display }) => {
     }
   };
 
-  return <ToggleButton>{getIcon()}</ToggleButton>;
+  return (
+    <button
+      className={styles.toggleButton}
+      role='button'
+    >
+      {getIcon()}
+    </button>
+  );
 };
 
 export default TagToggle;

@@ -1,13 +1,6 @@
 import { useState } from "react";
 import TagToggle from "./TagToggle";
-import {
-  TagContainer,
-  MobileHeaderContainer,
-  DesktopHeaderContainer,
-  Header,
-  TagList,
-  TagItem,
-} from "./TagDisplay.styles";
+import styles from './TagDisplay.module.css';
 
 interface Props {
   tags: string[];
@@ -39,9 +32,10 @@ const TagDisplay: React.FC<Props> = ({
   const handleTagDisplay = () => {
     if (showTags && tags.length > 0) {
       return (
-        <TagList>
+        <ul className={styles.tagList}>
           {tags.map((tag, index) => (
-            <TagItem
+            <li
+              className={styles.tagItem}
               tabIndex={0}
               key={index}
               onClick={() => setTag(tag)}
@@ -50,9 +44,9 @@ const TagDisplay: React.FC<Props> = ({
               }
             >
               {tag}
-            </TagItem>
+            </li>
           ))}
-        </TagList>
+        </ul>
       );
     }
   };
@@ -63,16 +57,23 @@ const TagDisplay: React.FC<Props> = ({
   }
 
   return (
-    <TagContainer>
-      <MobileHeaderContainer onClick={() => setShowTags(!showTags)}>
-        <Header>Popular tags in this category</Header>
+    <div>
+      <div
+        className={styles.mobileHeaderContainer}
+        onClick={() => setShowTags(!showTags)}
+      >
+        <h3 className={styles.header}>
+          Popular tags in this category
+        </h3>
         <TagToggle display={showTags} />
-      </MobileHeaderContainer>
-      <DesktopHeaderContainer>
-        <Header>Popular tags in this category</Header>
-      </DesktopHeaderContainer>
+      </div>
+      <div className={styles.desktopHeaderContainer}>
+        <h3 className={styles.header}>
+          Popular tags in this category
+        </h3>
+      </div>
       {handleTagDisplay()}
-    </TagContainer>
+    </div>
   );
 };
 

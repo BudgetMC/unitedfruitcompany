@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const FullPageContainer = styled.div`
-  height: calc(100vh - ${({ theme }) => theme.navbar.height});
+  height: calc(100vh - var(--navHeight));
   width: 100%;
-  margin-top: ${({ theme }) => theme.navbar.height};
+  margin-top: var(--navHeight);
 `;
 
 export const FullPageContainerContent = styled.div`

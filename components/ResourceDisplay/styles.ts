@@ -44,7 +44,7 @@ export const FullScreenContent = styled.div`
   align-items: center;
   border-radius: 5px;
   padding: 10px;
-  box-shadow: ${({ theme }) => theme.shadow};
+  box-shadow: var(--shadow);
 `
 
 export const CloseButton = styled.button`

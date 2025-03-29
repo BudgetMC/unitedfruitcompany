@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 const Offset = styled.div`
-  margin-top: ${({ theme }) => theme.navbar.height};
+  margin-top: var(--navHeight);
 `;
 
 const NavOffset: React.FC<{ child: ReactNode }> = ({ child }) => {
