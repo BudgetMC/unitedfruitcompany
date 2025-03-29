@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Header } from "./TimelineHeader.styles";
-import { useTrail, config } from "@react-spring/web";
+import { motion, AnimatePresence } from "framer-motion";
 import { ListedPost } from "../../lib/types";
+import styles from './TimelineHeader.module.css';
 
 interface Props {
   post: ListedPost;
@@ -13,27 +13,26 @@ const TimelineHeader: React.FC<Props> = ({ post, activePost, children }) => {
   const [isActive, setIsActive] = useState(false);
   const lines = React.Children.toArray(children);
 
-  const trail = useTrail(lines.length, {
-    to: { opacity: isActive ? 1 : 0 },
-    from: { opacity: isActive ? 0 : 1 },
-    config: config.molasses,
-  });
-
   useEffect(() => {
-    if (post.title === activePost.title) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
+    setIsActive(post.title === activePost.title);
   }, [activePost, post.title]);
 
   return (
     <>
-      {trail.map((props, index) => (
-        <Header style={props} key={index}>
-          {lines[index]}
-        </Header>
-      ))}
+      <AnimatePresence>
+        {isActive &&
+          lines.map((line, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+            >
+              <span className={styles.header}>{line}</span>
+            </motion.div>
+          ))}
+      </AnimatePresence>
     </>
   );
 };

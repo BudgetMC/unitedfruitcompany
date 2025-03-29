@@ -4,8 +4,9 @@ import Container from "../Container";
 import { Post } from "../../lib/types";
 import { useEffect, useState } from "react";
 import FilterOptions from "./FilterOptions";
-import { a, useTrail } from "@react-spring/web";
-import styles from './Bibliography.module.css';
+import { motion } from "framer-motion";
+import styles from "./Bibliography.module.css";
+import React from "react";
 
 interface Props {
   items: Post[];
@@ -29,28 +30,12 @@ const Bibliography: React.FC<Props> = ({ items }) => {
           )
         );
       } else {
-        setItemsToShow(
-          items.filter((item) => item.tags.labelTags.includes(filter))
-        );
+        setItemsToShow(items.filter((item) => item.tags.labelTags.includes(filter)));
       }
     } else {
       setItemsToShow(items);
     }
   }, [filter, items]);
-
-  const [trail, api] = useTrail(itemsToShow.length, () => ({
-    config: {
-      mass: 1,
-      tension: 4000,
-      friction: 250,
-    },
-    from: { y: -20, opacity: 0 },
-    to: { y: 0, opacity: 1 },
-  }));
-
-  useEffect(() => {
-    api.start({ reset: true });
-  }, [api, itemsToShow]);
 
   return (
     <Container>
@@ -63,11 +48,19 @@ const Bibliography: React.FC<Props> = ({ items }) => {
       </p>
       <FilterOptions filter={filter} setFilter={setFilter} />
       <div className={styles.postList}>
-        {trail.map((style, index) => (
-          <a.div key={itemsToShow[index].ID} style={style}>
-            <BibliographyCard item={itemsToShow[index]} />
-          </a.div>
-        ))}
+        <React.Fragment key={itemsToShow.length}>
+          {itemsToShow.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }} 
+              transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
+            >
+              <BibliographyCard item={item} />
+            </motion.div>
+          ))}
+        </React.Fragment>
       </div>
     </Container>
   );
