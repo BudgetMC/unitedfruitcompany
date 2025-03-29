@@ -1,18 +1,16 @@
-import styled from 'styled-components'
-
-export const Header = styled.h1`
+.header {
   font-family: "Special Elite";
   text-align: center;
   padding-top: 50px;
-`
+}
 
-export const Description = styled.p`
+.description {
   text-align: center;
-`
+}
 
-export const PostList = styled.div`
+.postList {
   display: flex;
   flex-flow: column;
   gap: 20px;
   margin: auto auto 40px auto;
-`
+}

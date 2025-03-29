@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Container } from "./styles";
+import styles from './AudioSecret.module.css';
 
 interface Props {
   child: ReactNode;
@@ -10,7 +10,12 @@ const Secret: React.FC<Props> = ({ child }) => {
     typeof Audio !== "undefined" ? new Audio("../audio/secret.ogx") : undefined;
 
   return (
-    <Container onClick={async () => await secret?.play()}>{child}</Container>
+    <div
+      className={styles.container}
+      onClick={async () => await secret?.play()}
+    >
+      {child}
+    </div>
   );
 };
 

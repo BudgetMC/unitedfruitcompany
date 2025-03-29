@@ -1,0 +1,20 @@
+.filterButton {
+  background: var(--thirdary);
+  border: none;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+  font-size: 1rem;
+  border-radius: 3px;
+}
+
+.filterButton:hover {
+  cursor: pointer;
+}
+
+.filterButton svg {
+  height: 20px;
+  width: 20px;
+}

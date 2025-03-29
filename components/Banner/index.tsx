@@ -1,14 +1,8 @@
-import {
-  FullwidthContainer,
-  ContainerContent,
-  Header,
-  DesktopNavLink,
-  MobileNavLink,
-} from "./styles";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft } from "react-bootstrap-icons";
 import { useRouter } from "next/router";
 import { getUpperPath } from "../../lib/common";
+import styles from './Banner.module.css';
 
 interface Props {
   header: string;
@@ -20,38 +14,38 @@ const Banner: React.FC<Props> = ({ header, previousSlug, nextSlug }) => {
   const router = useRouter();
 
   return (
-    <FullwidthContainer>
-      <ContainerContent>
-        <DesktopNavLink>
+    <div className={styles.fullWidthContainer}>
+      <div className={styles.containerContent}>
+        <p className={styles.desktopNavLink}>
           <Link href={`${getUpperPath(router.pathname)}/${previousSlug}`}>
             Previous
           </Link>
-        </DesktopNavLink>
-        <MobileNavLink>
+        </p>
+        <div className={styles.mobileNavLink}>
           <Link
             href={`${getUpperPath(router.pathname)}/${previousSlug}`}
             passHref
           >
             <ArrowLeft />
           </Link>
-        </MobileNavLink>
-        <Header>
+        </div>
+        <p className={styles.header}>
           <Link href={getUpperPath(router.pathname)} legacyBehavior>
             {header}
           </Link>
-        </Header>
-        <DesktopNavLink>
+        </p>
+        <p className={styles.desktopNavLink}>
           <Link href={`${getUpperPath(router.pathname)}/${nextSlug}`}>
             Next
           </Link>
-        </DesktopNavLink>
-        <MobileNavLink>
+        </p>
+        <div className={styles.mobileNavLink}>
           <Link href={`${getUpperPath(router.pathname)}/${nextSlug}`} passHref>
             <ArrowRight />
           </Link>
-        </MobileNavLink>
-      </ContainerContent>
-    </FullwidthContainer>
+        </div>
+      </div>
+    </div>
   );
 };
 

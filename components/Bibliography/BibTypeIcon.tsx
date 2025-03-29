@@ -32,8 +32,6 @@ const getIcon = (type: string | null) => {
   }
 };
 
-const BibTypeIcon: React.FC<Props> = ({ type }) => {
-  return <>{getIcon(type)}</>;
-};
+const BibTypeIcon: React.FC<Props> = ({ type }) => getIcon(type);
 
 export default BibTypeIcon;

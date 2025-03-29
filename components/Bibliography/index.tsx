@@ -2,10 +2,10 @@ import TypeWriterScript from "../../components/TypewriterScript";
 import BibliographyCard from "../BibliographyCard";
 import Container from "../Container";
 import { Post } from "../../lib/types";
-import { Header, Description, PostList } from "./styles";
 import { useEffect, useState } from "react";
 import FilterOptions from "./FilterOptions";
 import { a, useTrail } from "@react-spring/web";
+import styles from './Bibliography.module.css';
 
 interface Props {
   items: Post[];
@@ -54,21 +54,21 @@ const Bibliography: React.FC<Props> = ({ items }) => {
 
   return (
     <Container>
-      <Header>
+      <h1 className={styles.header}>
         <TypeWriterScript text={"Resources"} averageDuration={1000} />
-      </Header>
-      <Description>
+      </h1>
+      <p className={styles.description}>
         This page lists the sources we used, as well as other resources that we
         couldn&apos;t secure the rights to reproduce.
-      </Description>
+      </p>
       <FilterOptions filter={filter} setFilter={setFilter} />
-      <PostList>
+      <div className={styles.postList}>
         {trail.map((style, index) => (
           <a.div key={itemsToShow[index].ID} style={style}>
             <BibliographyCard item={itemsToShow[index]} />
           </a.div>
         ))}
-      </PostList>
+      </div>
     </Container>
   );
 };

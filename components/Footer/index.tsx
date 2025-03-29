@@ -1,9 +1,9 @@
 import AudioSecret from "../AudioSecret";
-import { FooterContainer } from "./styles";
+import styles from './Footer.module.css';
 
 const Footer: React.FC = () => {
   return (
-    <FooterContainer>
+    <footer className={styles.footerContainer}>
       <p>
         Site created by <a href="https://camden.lol">Camden Mecklem</a>.
       </p>
@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         Content created by HIS394/HNR331, proctored by Dr. Jonathan T. Reynolds.
       </p>
       <AudioSecret child={<span>🍌</span>} />
-    </FooterContainer>
+    </footer>
   );
 };
 
