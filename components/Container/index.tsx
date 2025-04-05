@@ -2,7 +2,7 @@ import styles from './Container.module.css';
 
 interface ContainerProps {
   children: React.ReactElement[]
-  backgroundColor: string
+  backgroundColor?: string
 }
 
 const Container = (props: ContainerProps) => (
