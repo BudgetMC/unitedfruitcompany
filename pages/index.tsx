@@ -3,12 +3,7 @@ import Head from "next/head";
 import TypewriterScript from "../components/TypewriterScript";
 import HomeGrid from "../components/HomeGrid";
 import Hero, { Side } from "../components/Hero";
-import {
-  Main,
-  MainContent,
-  NavbarPlaceholder,
-  Title,
-} from "../styles/Home.style";
+import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
   return (
@@ -22,23 +17,23 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Main>
-        <MainContent>
-          <NavbarPlaceholder />
-          <Title>
+      <main className={styles.main}>
+        <div className={styles.mainContent}>
+          <div className={styles.navbarPlaceholder} />
+          <h1 className={styles.title}>
             <TypewriterScript
               text={"United Fruit Company"}
               averageDuration={2000}
             />
-          </Title>
+          </h1>
 
           <p>
             <TypewriterScript text={"History Project"} averageDuration={1500} />
           </p>
 
           <HomeGrid />
-        </MainContent>
-      </Main>
+        </div>
+      </main>
 
       <Hero
         header={'"A Great Fruit Combine"'}

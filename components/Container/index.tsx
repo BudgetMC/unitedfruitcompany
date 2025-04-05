@@ -1,31 +1,36 @@
-import styled from "styled-components";
+import styles from './Container.module.css';
 
-const Container = styled.div`
-  width: 780px;
-  margin: auto;
-  padding: 0 0 40px 0;
+interface ContainerProps {
+  children: React.ReactElement[]
+  backgroundColor: string
+}
 
-  @media (max-width: 800px) {
-    width: 100%;
-    padding: 0 10px;
-  }
-`;
+const Container = (props: ContainerProps) => (
+  <div
+    className={styles.container}
+    style={{ backgroundColor: props.backgroundColor }}
+  >
+    {props.children}
+  </div>
+)
 
-export const WideContainer = styled.div`
-  width: 1400px;
-  margin: auto;
-  padding: 0 0 40px 0;
+export const FullWidthContainer = (props: ContainerProps) => (
+  <div
+    className={styles.fullWidthContainer}
+    style={{ backgroundColor: props.backgroundColor }}
+  >
+    {props.children}
+  </div>
+)
 
-  @media (max-width: 1420px) {
-    width: 100%;
-    padding: 0 10px;
-  }
-`;
+export const WideContainer = (props: ContainerProps) => (
+  <div
+    className={styles.wideContainer}
+    style={{ backgroundColor: props.backgroundColor }}
+  >
+    {props.children}
+  </div>
+)
 
-export const FullWidthContainer = styled.div<{ backgroundColor: string }>`
-  margin: 0;
-  padding: 0 0 40px 0;
-  background: ${(props) => props.backgroundColor};
-`;
 
 export default Container;

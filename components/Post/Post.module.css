@@ -1,0 +1,51 @@
+/* Most styles are provided by the Wordpress API
+They have pretty good defaults but we need to
+override some things. */
+.content a {
+  overflow-wrap: break-word;
+}
+
+/* This is Wordpress's class for right-aligned text.
+For some reason it doesn't automatically format it
+like it does for everything else. */
+.content .has-text-align-right {
+  text-align: right;
+}
+
+.imageContainer {
+  height: 300px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.imageContainer img {
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.title {
+  font-family: "Special Elite";
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  top: 5px;
+  font-size: 2.7rem;
+}
+
+@media screen and (max-width: 600px) {
+  .content {
+    hyphens: auto;
+  }
+
+  .content p {
+    font-size: 1.1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}

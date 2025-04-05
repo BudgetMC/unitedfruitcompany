@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "../Image";
-import { Container, TextSide, PicSide } from "./styles";
+import styles from './Hero.module.css';
 
 export enum Side {
   Right,
@@ -25,22 +25,22 @@ const Hero: React.FC<Props> = ({
   link,
 }) => {
   const textSection = (
-    <TextSide>
+    <div className={styles.textSide}>
       <h2>{link ? <Link href={link}>{header + " ➔"}</Link> : header}</h2>
       <p>{text}</p>
-    </TextSide>
+    </div>
   );
 
   const imageSection = (
-    <PicSide>
+    <div className={styles.picSide}>
       <Image src={picturePath} alt={pictureAltText} />
-    </PicSide>
+    </div>
   );
   return (
-    <Container>
+    <div className={styles.container}>
       {side === Side.Left ? textSection : imageSection}
       {side === Side.Right ? textSection : imageSection}
-    </Container>
+    </div>
   );
 };
 

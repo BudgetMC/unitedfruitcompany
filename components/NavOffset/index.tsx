@@ -5,17 +5,19 @@
 
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import styled from "styled-components";
-
-const Offset = styled.div`
-  margin-top: var(--navHeight);
-`;
+import styles from './NavOffset.module.css';
 
 const NavOffset: React.FC<{ child: ReactNode }> = ({ child }) => {
   const router = useRouter();
 
   if (router.pathname !== "/") {
-    return <Offset>{child}</Offset>;
+    return (
+      <div
+        className={styles.offset}
+      >
+        {child}
+      </div>
+    );
   } else {
     return <>{child}</>;
   }

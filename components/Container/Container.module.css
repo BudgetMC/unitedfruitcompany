@@ -1,0 +1,28 @@
+.container {
+  width: 780px;
+  margin: auto;
+  padding: 0 0 40px 0;
+}
+
+.fullWidthContainer {
+  margin: 0;
+  padding: 0 0 40px 0;
+}
+
+.wideContainer {
+  width: 1400px;
+  margin: auto;
+  padding: 0 0 40px 0;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .wideContainer {
+    width: 100%;
+    padding: 0 10px;
+  }
+}

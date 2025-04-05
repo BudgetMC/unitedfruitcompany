@@ -1,0 +1,4 @@
+.image {
+  object-fit: contain;
+  transition: 0.3s;
+}

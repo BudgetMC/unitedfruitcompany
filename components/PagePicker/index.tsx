@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Button } from "./styles";
+import styles from './PagePicker.module.css';
 
 interface Props {
   pageCount: number;
@@ -11,15 +11,24 @@ const PagePicker: React.FC<Props> = ({ pageCount, setPage }) => {
     const buttons = [];
     for (let x = 1; x <= pageCount; x++) {
       buttons.push(
-        <Button onClick={() => setPage(x)} key={x}>
+        <button
+          className={styles.button}
+          onClick={() => setPage(x)}
+          key={x}
+          role='button'
+        >
           {x}
-        </Button>
+        </button>
       );
     }
     return buttons;
   };
 
-  return <Container>{displayPageButtons()}</Container>;
+  return (
+    <div className={styles.container}>
+      {displayPageButtons()}
+    </div>
+  );
 };
 
 export default PagePicker;

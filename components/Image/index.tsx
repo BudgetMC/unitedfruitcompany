@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
+import styles from './Image.module.css';
 
 interface Props {
   src: string;
@@ -8,18 +8,16 @@ interface Props {
   height?: string;
 }
 
-const PrettyImage = styled.img<{ opacity: number }>`
-  transition: 0.3s;
-  height: ${(props) => (props.height ? props.height : "100%")};
-  width: ${(props) => (props.width ? props.width : "100%")};
-  object-fit: contain;
-  filter: opacity(${(props) => props.opacity});
-`;
-
 const Image: React.FC<Props> = ({ src, alt, width, height }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const imageRef = useRef<HTMLImageElement>(null);
+
+  const imageStyles: CSSProperties = useMemo(() => ({
+    height: height ? `${height}px` : '100%',
+    width: width ? `${width}px` : '100%',
+    filter: `opacity(${imageLoaded ? 1 : 0})`
+  }), [height, width, imageLoaded])
 
   useEffect(() => {
     if (imageRef.current) {
@@ -32,14 +30,15 @@ const Image: React.FC<Props> = ({ src, alt, width, height }) => {
   }, [src]);
 
   return (
-    <PrettyImage
+    <img
+      alt={alt ? alt : ""}
+      className={styles.image}
+      height={height}
+      onLoad={() => setImageLoaded(true)}
       ref={imageRef}
       src={src}
-      height={height}
+      style={imageStyles}
       width={width}
-      alt={alt ? alt : ""}
-      opacity={imageLoaded ? 1 : 0}
-      onLoad={() => setImageLoaded(true)}
     />
   );
 };

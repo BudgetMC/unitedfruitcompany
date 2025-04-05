@@ -1,10 +1,10 @@
 import HomeGridItem from "./NavGridItem";
-import { FlexContainer, FlexContainerContent } from "./styles";
+import styles from './HomeGrid.module.css';
 
 const HomeGrid: React.FC = () => {
   return (
-    <FlexContainer>
-      <FlexContainerContent>
+    <div className={styles.flexContainer}>
+      <div className={styles.flexContainerContent}>
         <HomeGridItem
           link="/biographies"
           label="Biographies"
@@ -35,8 +35,8 @@ const HomeGrid: React.FC = () => {
           label="About"
           imagePath="https://unitedfruitcompany.files.wordpress.com/2021/11/roman-kraft-7spg5olfexc-unsplash.jpg?w=480"
         />
-      </FlexContainerContent>
-    </FlexContainer>
+      </div>
+    </div>
   );
 };
 

@@ -1,16 +1,10 @@
-import {
-  NavContainer,
-  NavDiv,
-  NavRight,
-  DropdownToggle,
-  MobileDropdown,
-} from "./styles";
 import Image from "../Image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { List, X } from "react-bootstrap-icons";
 import NavLinks from "./NavLinks";
+import styles from './Navbar.module.css';
 
 const Navbar: React.FC = () => {
   const [displayDropdown, toggleDropdown] = useState(false);
@@ -30,9 +24,16 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const backgroundStyle = useMemo(() => ({
+    backgroundColor: router.pathname === "/" ? "rgba(0, 0, 0, 0.6)" : "#3a3a3a"
+  }), [router.pathname])
+
   return (
-    <NavDiv color={router.pathname === "/" ? "rgba(0, 0, 0, 0.6)" : "#3a3a3a"}>
-      <NavContainer>
+    <div
+      className={styles.nav}
+      style={backgroundStyle}
+    >
+      <div className={styles.navContainer}>
         <div>
           <Link href="/" passHref>
             <Image
@@ -43,19 +44,22 @@ const Navbar: React.FC = () => {
             />
           </Link>
         </div>
-        <NavRight>
+        <nav className={styles.navRight}>
           <NavLinks />
-        </NavRight>
-        <DropdownToggle>{handleDropdownToggleIcon()}</DropdownToggle>
+        </nav>
+        <div className={styles.dropdownToggle}>
+          {handleDropdownToggleIcon()}
+        </div>
         {displayDropdown ? (
-          <MobileDropdown
-            color={router.pathname === "/" ? "rgba(0, 0, 0, 0.6)" : "#3a3a3a"}
+          <nav
+            className={styles.mobileDropdown}
+            style={backgroundStyle}
           >
             <NavLinks />
-          </MobileDropdown>
+          </nav>
         ) : null}
-      </NavContainer>
-    </NavDiv>
+      </div>
+    </div>
   );
 };
 

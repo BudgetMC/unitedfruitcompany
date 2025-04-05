@@ -1,15 +1,13 @@
-import styled from "styled-components";
-
-export const Container = styled.div`
+.container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  gap: 10px;
-`;
+  gap: 10px; 
+}
 
-export const Button = styled.button`
+.button {
   height: 40px;
   width: 40px;
   background: var(--secondary);
@@ -17,10 +15,9 @@ export const Button = styled.button`
   border-radius: 10px;
   transition: filter 0.2s;
   box-shadow: var(--shadow);
+}
 
-  &:hover,
-  &:focus {
-    cursor: pointer;
-    filter: brightness(0.8);
-  }
-`;
+.button:hover, .button:focus {
+  cursor: pointer;
+  filter: brightness(0.8);
+}

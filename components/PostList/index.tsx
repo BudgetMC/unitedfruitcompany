@@ -3,9 +3,9 @@ import TypewriterScript from "../TypewriterScript";
 import PostCard from "../PostCard";
 import SearchPane from "../SearchPane";
 import { ThreeDots } from "react-bootstrap-icons";
-import { Header, CardFlex, Container, Error, LoadingIcon } from "./styles";
 import { useEffect, useRef, useState } from "react";
 import { useQueryState } from "nuqs";
+import styles from './PostList.module.css';
 
 interface Props {
   label: string; // e.g. "Biographies"
@@ -53,38 +53,42 @@ const PostList: React.FC<Props> = ({ label, posts, tags }) => {
   const displayPosts = () => {
     if (loading) {
       return (
-        <LoadingIcon>
+        <div className={styles.loadingIcon}>
           <ThreeDots />
-        </LoadingIcon>
+        </div>
       );
     }
 
     if (displayedPosts.length > 0) {
       return (
-        <CardFlex>
+        <ul className={styles.cardFlex}>
           {displayedPosts.map((post) => (
             <li key={post.ID}>
               <PostCard post={post} />
             </li>
           ))}
-        </CardFlex>
+        </ul>
       );
     } else {
-      return <Error>Nothing found :(</Error>;
+      return (
+        <p className={styles.error}>
+          Nothing found :(
+        </p>
+      );
     }
   };
 
   return (
     <>
-      <Container>
+      <div className={styles.container}>
         <SearchPane tags={tags} />
         <div>
-          <Header>
+          <h1 className={styles.header}>
             <TypewriterScript text={label} averageDuration={1000} />
-          </Header>
+          </h1>
           {displayPosts()}
         </div>
-      </Container>
+      </div>
     </>
   );
 };

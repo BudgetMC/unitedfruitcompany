@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "../Image";
 import TypeWriterScript from "../TypewriterScript";
-import { ItemContainer } from "./styles";
+import styles from './HomeGrid.module.css';
 
 interface Props {
   link: string;
@@ -12,12 +12,12 @@ interface Props {
 const HomeGrid: React.FC<Props> = ({ link, label, imagePath }) => {
   return (
     <Link href={link} passHref>
-      <ItemContainer>
+      <div className={styles.itemContainer}>
         <Image alt={label} src={imagePath} />
         <p>
           <TypeWriterScript text={label} averageDuration={1500} />
         </p>
-      </ItemContainer>
+      </div>
     </Link>
   );
 };

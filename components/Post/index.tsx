@@ -1,7 +1,7 @@
 import Image from "../Image";
 import { Post } from "../../lib/types";
 import TypewriterScript from "../TypewriterScript";
-import { Title, ImageContainer, Content } from "./styles";
+import styles from './Post.module.css';
 
 interface Props {
   post: Post;
@@ -11,22 +11,23 @@ const PostContent: React.FC<Props> = ({ post }) => {
   const handleImage = () => {
     if (post.featured_image) {
       return (
-        <ImageContainer>
+        <div className={styles.imageContainer}>
           <Image src={`${post.featured_image}?w=600`} alt="" />
-        </ImageContainer>
+        </div>
       );
     }
   };
 
   return (
     <>
-      <Title>
+      <h1 className={styles.title}>
         <TypewriterScript text={post.title} />
-      </Title>
+      </h1>
       {handleImage()}
-      <Content>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
-      </Content>
+      <div
+        className={styles.content}
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
     </>
   );
 };

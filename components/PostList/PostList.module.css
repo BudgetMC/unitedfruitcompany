@@ -1,0 +1,59 @@
+.header {
+  font-family: "Special Elite";
+  text-align: center;
+}
+
+.cardFlex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 100%;
+  justify-content: center;
+  padding: 0;
+}
+
+.cardFlex li {
+  list-style-type: none;
+}
+
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  padding-top: 15px;
+}
+
+.error {
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.loadingIcon {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+@keyframes pulse {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.5);}
+  100% {transform: scale(1);}
+}
+
+.loadingIcon svg {
+  height: 40px;
+  width: 40px;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    display: initial;
+  }
+}
