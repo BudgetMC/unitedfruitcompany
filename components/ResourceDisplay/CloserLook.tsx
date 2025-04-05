@@ -1,8 +1,8 @@
 import { useRef } from "react";
-import { FullScreenContainer, FullScreenContent, CloseButton } from "./styles";
 import Image from "../Image";
 import { XLg } from "react-bootstrap-icons";
 import { useEffect } from "react";
+import styles from './ResourceDisplay.module.css';
 
 interface Props {
   image: string;
@@ -26,19 +26,28 @@ const CloserLook: React.FC<Props> = ({
   }, [showCloserLook]);
 
   return (
-    <FullScreenContainer onClick={() => setCloserLook(false)}>
-      <FullScreenContent>
-        {/* Button included for a11y reasons */}
-        <CloseButton
+    <div
+      className={styles.fullScreenContainer}
+      onClick={() => setCloserLook(false)}
+    >
+      <div className={styles.fullScreenContent}>
+        <button
+          className={styles.closeButton}
           onClick={() => setCloserLook(false)}
           tabIndex={0}
           ref={closeButtonRef}
+          role='button'
         >
           <XLg />
-        </CloseButton>
-        <Image src={image} alt={alt} />
-      </FullScreenContent>
-    </FullScreenContainer>
+        </button>
+        <Image
+          alt={alt}
+          height='100%'
+          src={image}
+          width='100%'
+        />
+      </div>
+    </div>
   );
 };
 

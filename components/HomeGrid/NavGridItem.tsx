@@ -13,7 +13,12 @@ const HomeGrid: React.FC<Props> = ({ link, label, imagePath }) => {
   return (
     <Link href={link} passHref>
       <div className={styles.itemContainer}>
-        <Image alt={label} src={imagePath} />
+        <Image
+          alt={label}
+          height='100%'
+          src={imagePath}
+          width='100%'
+        />
         <p>
           <TypeWriterScript text={label} averageDuration={1500} />
         </p>

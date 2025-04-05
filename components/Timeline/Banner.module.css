@@ -1,6 +1,4 @@
-import styled from "styled-components";
-
-export const Container = styled.div`
+.container {
   height: calc(100vh - var(--navHeight));
   width: 100%;
   display: flex;
@@ -8,15 +6,9 @@ export const Container = styled.div`
   align-items: center;
   flex-flow: column;
   text-align: center;
+}
 
-  @media (max-width: 800px) {
-    h1 {
-      font-size: 2rem;
-    }
-  }
-`;
-
-export const SeeMoreButton = styled.button`
+.seeMoreButton {
   font-size: 2rem;
   background: none;
   border: none;
@@ -28,15 +20,21 @@ export const SeeMoreButton = styled.button`
   gap: 10px;
   color: white;
   font-family: "Alegreya Sans";
+}
 
-  &:hover,
-  &:focus {
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.4);
-  }
+.seeMoreButton:hover,
+.seeMoreButton:focus {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.4);
+}
 
-  svg {
-    height: 40px;
-    width: 40px;
+.seeMoreButton svg {
+  height: 40px;
+  width: 40px;
+}
+
+@media screen and (max-width: 800px) {
+  .container h1 {
+    font-size: 2rem;
   }
-`;
+}

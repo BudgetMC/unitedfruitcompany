@@ -1,8 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import TagDisplay from "./TagDisplay";
 import { X } from "react-bootstrap-icons";
-import { Pane, Content, Label, Input, ResetButton } from "./styles";
-import styles from './TagDisplay.module.css';
+import styles from './SearchPane.module.css';
 
 import { useQueryState } from "nuqs";
 
@@ -40,21 +39,27 @@ const PaneContent: React.FC<Props> = ({ tags }) => {
   const handleResetButton = () => {
     if (searchValue !== "") {
       return (
-        <ResetButton type="reset" onClick={() => reset()}>
+        <button
+          className={styles.resetButton}
+          onClick={reset}
+          role='button'
+          type="reset"
+        >
           <X />
-        </ResetButton>
+        </button>
       );
     }
   };
 
   return (
     <>
-      <Pane>
-        <Content>
+      <div className={styles.pane}>
+        <div className={styles.content}>
           <form onSubmit={(event) => handleSubmit(event)}>
-            <Label>
+            <label className={styles.label}>
               Search:
-              <Input
+              <input
+                className={styles.input}
                 type="text"
                 value={searchValue}
                 name="query"
@@ -64,7 +69,7 @@ const PaneContent: React.FC<Props> = ({ tags }) => {
                 }
               />
               {handleResetButton()}
-            </Label>
+            </label>
           </form>
           <div className={styles.desktopTags}>
             <TagDisplay
@@ -82,8 +87,8 @@ const PaneContent: React.FC<Props> = ({ tags }) => {
               setSearchValue={setSearchValue}
             />
           </div>
-        </Content>
-      </Pane>
+        </div>
+      </div>
     </>
   );
 };

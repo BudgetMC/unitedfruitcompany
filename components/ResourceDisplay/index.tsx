@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Post } from "../../lib/types";
 import CloserLook from "./CloserLook";
 import Image from "../Image";
-import { Content, Title, Description } from "./styles";
+import styles from './ResourceDisplay.module.css';
 
 interface Props {
   post: Post;
@@ -31,13 +31,24 @@ const ResourceDisplay: React.FC<Props> = ({ post }) => {
   return (
     <>
       {handleCloserLook()}
-      <Content onClick={() => setCloserLook(true)}>
-        <Image src={`${post.featured_image}?w=600`} alt={post.title} />
-      </Content>
-      <Title>{post.title}</Title>
-      <Description>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
-      </Description>
+      <div
+        className={styles.content}
+        onClick={() => setCloserLook(true)}
+      >
+        <Image
+          alt={post.title}
+          height='100%'
+          src={`${post.featured_image}?w=600`}
+          width='100%'
+        />
+      </div>
+      <h1 className={styles.title}>
+        {post.title}
+      </h1>
+      <div
+        className={styles.description}
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
     </>
   );
 };

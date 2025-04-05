@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import TimelineHeader from "./TimelineHeader";
-import { Item, Content, InfoHeader, InfoDescription } from "./InfoBox.styles";
 import { ListedPost } from "../../lib/types";
+import styles from './InfoBox.module.css';
 
 interface Props {
   post: ListedPost;
@@ -12,14 +12,22 @@ const InfoBox: React.FC<Props> = ({ post, activePost }) => {
   const itemRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Item ref={itemRef}>
-      <Content>
+    <div
+      className={styles.item}
+      ref={itemRef}
+    >
+      <div className={styles.content}>
         <TimelineHeader post={post} activePost={activePost}>
-          <InfoHeader>{post.title}</InfoHeader>
-          <InfoDescription dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+          <h2 className={styles.infoHeader}>
+            {post.title}
+          </h2>
+          <div
+            className={styles.infoDescription}
+            dangerouslySetInnerHTML={{ __html: post.excerpt }}
+          />
         </TimelineHeader>
-      </Content>
-    </Item>
+      </div>
+    </div>
   );
 };
 

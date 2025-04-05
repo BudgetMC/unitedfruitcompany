@@ -1,14 +1,14 @@
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ListedPost } from "../../lib/types";
-import { Box } from "./ImageBox.styles";
+import styles from './ImageBox.module.css';
 
 interface Props {
   activePost: ListedPost;
 }
 
 const ImageBox: React.FC<Props> = ({ activePost }) => {
-  const [opacity, setOpacity] = useState(0);
+  const [brightness, setBrightness] = useState(0);
   const [currentImage, setCurrentImage] = useState(activePost.featured_image);
 
   // Keep track of whether we're waiting for a timeout to finish.
@@ -19,7 +19,7 @@ const ImageBox: React.FC<Props> = ({ activePost }) => {
     const transition = () => {
       if (activePost.featured_image) {
         setCurrentImage(activePost.featured_image);
-        setOpacity(1);
+        setBrightness(1);
       }
     };
 
@@ -28,7 +28,7 @@ const ImageBox: React.FC<Props> = ({ activePost }) => {
       window.clearTimeout(timeoutRef.current);
     }
 
-    setOpacity(0);
+    setBrightness(0);
     timeoutRef.current = window.setTimeout(() => transition(), 400);
 
     return () => {
@@ -38,10 +38,18 @@ const ImageBox: React.FC<Props> = ({ activePost }) => {
     };
   }, [activePost]);
 
+  const styleObj = useMemo(() => ({
+    backgroundImage: `url(${currentImage}?w=800)`,
+    filter: `brightness(${brightness})`
+  }), [currentImage, brightness])
+
   return (
-    <Box backgroundurl={`${currentImage}?w=800`} opacity={opacity}>
+    <div
+      className={styles.box}
+      style={styleObj}
+    >
       <Link href={`/timeline/${activePost.slug}`}>See more &#10132;</Link>
-    </Box>
+    </div>
   );
 };
 

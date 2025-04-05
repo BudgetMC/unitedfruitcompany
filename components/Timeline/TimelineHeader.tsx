@@ -14,11 +14,11 @@ const TimelineHeader: React.FC<Props> = ({ post, activePost, children }) => {
 
   const isActive = useMemo(
     () => post.title === activePost.title,
-    [post.title, activePost]
+    [post.title, activePost.title]
   )
 
   useEffect(() => {
-    if (containerRef.current && isActive) {
+    if (typeof window !== 'undefined' && containerRef.current && isActive) {
       const elements = containerRef.current.children;
       Array.from(elements).forEach((el, index) => {
         el.animate(
@@ -41,9 +41,12 @@ const TimelineHeader: React.FC<Props> = ({ post, activePost, children }) => {
     <div ref={containerRef}>
       {isActive &&
         lines.map((line, index) => (
-          <span key={index} className={styles.header}>
+          <div
+            className={styles.header}
+            key={index}
+          >
             {line}
-          </span>
+          </div>
         ))}
     </div>
   );

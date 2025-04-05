@@ -1,0 +1,55 @@
+.backgroundTitle {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  font-size: clamp(5rem, 15vw, 30rem);
+  color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.backgroundTitleEnd {
+  right: 20px;
+  bottom: 200px;
+}
+
+.backgroundTitleStart {
+  left: 20px;
+  top: 200px;
+}
+
+.container {
+  color: white;
+  padding-top: 160px;
+}
+
+.header {
+  /* text-align: ${props => props.textAlign}; */
+  font-family: "Alegreya Sans";
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  font-size: 3rem;
+}
+
+.mobileTitle {
+  display: none;
+  font-size: 3.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .backgroundTitle {
+    display: none;
+  }
+
+  .container {
+    padding-top: 0;
+  }
+
+  .mobileTitle {
+    display: block;
+  }
+}

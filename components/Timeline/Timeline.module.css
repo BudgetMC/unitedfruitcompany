@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  background: black;
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.navButton {
+  font-size: 3rem;
+  width: 66px;
+  height: 66px;
+  position: fixed;
+  color: white;
+  background: rgba(243, 230, 187, 0.15);
+  border-radius: 50%;
+  border: none;
+  left: calc(50vw - 33px);
+  z-index: 1000;
+  transition: filter 0.75s;
+}
+
+.navButton:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .navButton {
+    display: none;
+  }
+}

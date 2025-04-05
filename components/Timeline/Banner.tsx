@@ -1,5 +1,5 @@
-import { Container, SeeMoreButton } from "./Banner.styles";
 import { ChevronDown } from "react-bootstrap-icons";
+import styles from './Banner.module.css';
 
 interface Props {
   scrollToContent: () => void;
@@ -7,17 +7,21 @@ interface Props {
 
 const Banner: React.FC<Props> = ({ scrollToContent }) => {
   return (
-    <Container>
+    <div className={styles.container}>
       <div /> {/* empty div so the below div is centered */}
       <div>
         <h1>The Story of the United Fruit Company</h1>
         <p>You can use the arrow keys to scroll.</p>
       </div>
-      <SeeMoreButton onClick={() => scrollToContent()}>
+      <button
+        className={styles.seeMoreButton}
+        onClick={() => scrollToContent()}
+        role='button'
+      >
         <span>Explore</span>
         <ChevronDown />
-      </SeeMoreButton>
-    </Container>
+      </button>
+    </div>
   );
 };
 

@@ -4,7 +4,7 @@ import useScreenHeight from "../../hooks/useScreenHeight";
 import Banner from "./Banner";
 import ImageBox from "./ImageBox";
 import InfoBox from "./InfoBox";
-import { Grid, Container, NavButton } from "./styles";
+import styles from './Timeline.module.css';
 
 interface Props {
   posts: ListedPost[];
@@ -96,32 +96,51 @@ const Timeline: React.FC<Props> = ({ posts }) => {
     return 0;
   });
 
+  const topButtonIsActive = (
+    typeof window !== "undefined" && activePost !== posts[0]
+  )
+
+  const bottomButtonIsActive = (
+    typeof window !== "undefined" &&
+    activePost !== posts[posts.length - 1] &&
+    window.scrollY >= screenHeight
+  )
+
   return (
-    <Container>
+    <div className={styles.container}>
       <Banner
         scrollToContent={() =>
           gridRef.current?.scrollIntoView({ behavior: "smooth" })
         }
       />
-      <Grid ref={gridRef}>
-        <NavButton
-          isActive={activePost !== posts[0] && typeof window !== "undefined"}
-          direction="up"
+      <div
+        className={styles.grid}
+        ref={gridRef}
+      >
+        <button
+          className={styles.navButton}
           onClick={() => scrolltoItem(currentIndex - 1)}
+          style={{
+            filter: `opacity(${+topButtonIsActive})`,
+            pointerEvents: topButtonIsActive ? 'auto' : 'none',
+            top: '20px'
+          }}
+          role='button'
         >
           &#8593;
-        </NavButton>
-        <NavButton
-          isActive={
-            activePost !== posts[posts.length - 1] &&
-            typeof window !== "undefined" &&
-            window.scrollY >= screenHeight
-          }
-          direction="down"
+        </button>
+        <button
+          className={styles.navButton}
           onClick={() => scrolltoItem(currentIndex + 1)}
+          style={{
+            bottom: '20px',
+            filter: `opacity(${+bottomButtonIsActive})`,
+            pointerEvents: bottomButtonIsActive ? 'auto' : 'none'
+          }}
+          role='button'
         >
           &#8595;
-        </NavButton>
+        </button>
         <div>
           {sortedPosts.map((post) => {
             return (
@@ -131,9 +150,11 @@ const Timeline: React.FC<Props> = ({ posts }) => {
             );
           })}
         </div>
-        <ImageBox activePost={activePost} />
-      </Grid>
-    </Container>
+        <ImageBox
+          activePost={activePost}
+        />
+      </div>
+    </div>
   );
 };
 

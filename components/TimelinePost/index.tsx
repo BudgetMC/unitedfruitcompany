@@ -1,13 +1,7 @@
 import { DisplayedPost } from "../../lib/types";
 import PostCard from "../PostCard";
 import ExpandableContent from "./ExpandableContent";
-import {
-  Container,
-  BackgroundTitleStart,
-  BackgroundTitleEnd,
-  MobileTitle,
-  Header,
-} from "./styles";
+import styles from './TimelinePost.module.css';
 
 interface Props {
   post: DisplayedPost;
@@ -26,9 +20,14 @@ const TimelinePost: React.FC<Props> = ({ post, bios, docs, articles }) => {
       sectionCount += 1;
       return (
         <div>
-          <Header textAlign={sectionCount % 2 === 0 ? "left" : "right"}>
+          <h2
+            className={styles.header}
+            style={{
+              textAlign: sectionCount % 2 === 0 ? "left" : "right"
+            }}
+          >
             The people
-          </Header>
+          </h2>
           <ExpandableContent flex={true}>
             {bios.map((bio) => (
               <PostCard key={bio.ID} post={bio} />
@@ -44,9 +43,14 @@ const TimelinePost: React.FC<Props> = ({ post, bios, docs, articles }) => {
       sectionCount += 1;
       return (
         <div>
-          <Header textAlign={sectionCount % 2 === 0 ? "left" : "right"}>
+          <h2
+            className={styles.header}
+            style={{
+              textAlign: sectionCount % 2 === 0 ? "left" : "right"
+            }}
+          >
             In their words
-          </Header>
+          </h2>
           <ExpandableContent flex={true}>
             {docs.map((doc) => (
               <PostCard key={doc.ID} post={doc} />
@@ -62,9 +66,14 @@ const TimelinePost: React.FC<Props> = ({ post, bios, docs, articles }) => {
       sectionCount += 1;
       return (
         <div>
-          <Header textAlign={sectionCount % 2 === 0 ? "left" : "right"}>
+          <h2
+            className={styles.header}
+            style={{
+              textAlign: sectionCount % 2 === 0 ? "left" : "right"
+            }}
+          >
             Concepts
-          </Header>
+          </h2>
           <ExpandableContent flex={true}>
             {articles.map((article) => (
               <PostCard key={article.ID} post={article} />
@@ -76,13 +85,26 @@ const TimelinePost: React.FC<Props> = ({ post, bios, docs, articles }) => {
   };
 
   return (
-    <Container>
+    <div className={styles.container}>
       {/* Split the title into the starting and ending year for a e s t h e t i c */}
-      <BackgroundTitleStart>{post.title.slice(0, 4)}</BackgroundTitleStart>
-      <BackgroundTitleEnd>{post.title.slice(5, 9)}</BackgroundTitleEnd>
-      <MobileTitle>{post.title}</MobileTitle>
+      <p className={`${styles.backgroundTitle} ${styles.backgroundTitleStart}`}>
+        {post.title.slice(0, 4)}
+      </p>
+      <p className={`${styles.backgroundTitle} ${styles.backgroundTitleEnd}`}>
+        {post.title.slice(5, 9)}
+      </p>
+      <p className={styles.mobileTitle}>
+        {post.title}
+      </p>
       <div>
-        <Header textAlign="left">The narrative</Header>
+        <h2
+          className={styles.header}
+          style={{
+            textAlign: 'left'
+          }}
+        >
+          The narrative
+        </h2>
         <ExpandableContent flex={false}>
           <article dangerouslySetInnerHTML={{ __html: post.content }} />
         </ExpandableContent>
@@ -90,7 +112,7 @@ const TimelinePost: React.FC<Props> = ({ post, bios, docs, articles }) => {
       {displayBios()}
       {displayDocs()}
       {displayArticles()}
-    </Container>
+    </div>
   );
 };
 

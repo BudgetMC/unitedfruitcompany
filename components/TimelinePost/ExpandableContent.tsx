@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Collapsed,
-  Expanded,
-  ToggleButton,
-  Flex,
-} from "./ExpandableContent.styles";
 import { ArrowDown } from "react-bootstrap-icons";
+import styles from './ExpandableContent.module.css';
 
 interface Props {
   flex: boolean;
@@ -25,15 +20,30 @@ const ExpandableContent: React.FC<Props> = ({ flex, children }) => {
 
   const displayContent = () => {
     if (expanded) {
-      return <Expanded>{handleFlex(content)}</Expanded>;
+      return (
+        <div className={styles.expanded}>
+          {handleFlex(content)}
+        </div>
+      );
     } else {
-      return <Collapsed ref={collapsedRef}>{handleFlex(content)}</Collapsed>;
+      return (
+        <div
+          className={styles.collapsed}
+          ref={collapsedRef}
+        >
+          {handleFlex(content)}
+        </div>
+      );
     }
   };
 
   const handleFlex = (children: ReturnType<typeof React.Children.toArray>) => {
     if (flex) {
-      return <Flex>{children}</Flex>;
+      return (
+        <div className={styles.flex}>
+          {children}
+        </div>
+      );
     } else {
       return children;
     }
@@ -52,9 +62,13 @@ const ExpandableContent: React.FC<Props> = ({ flex, children }) => {
       {expanded ? (
         ""
       ) : (
-        <ToggleButton onClick={() => setExpanded(true)}>
+        <button
+          className={styles.toggleButton}
+          onClick={() => setExpanded(true)}
+          role='button'
+        >
           <ArrowDown />
-        </ToggleButton>
+        </button>
       )}
     </>
   );

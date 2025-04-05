@@ -33,7 +33,12 @@ const Hero: React.FC<Props> = ({
 
   const imageSection = (
     <div className={styles.picSide}>
-      <Image src={picturePath} alt={pictureAltText} />
+      <Image
+        alt={pictureAltText}
+        height='100%'
+        src={picturePath}
+        width='100%'
+      />
     </div>
   );
   return (
