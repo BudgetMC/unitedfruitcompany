@@ -5,8 +5,8 @@ import { ListedPost } from "../../lib/types";
 import { WideContainer } from "../../components/Container";
 import PostList from "../../components/PostList";
 import usePageQuery from "../../hooks/usePageQuery";
-import { parseAsInteger, useQueryState } from "nuqs";
 import PagePicker from "../../components/PagePicker";
+import useQueryState from "../../hooks/useQueryState";
 
 interface Props {
   posts: ListedPost[];
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Biographies: NextPage<Props> = ({ posts, pageCount, tags }) => {
-  const [, setPage] = useQueryState<number>("page", parseAsInteger);
+  const pageParam = useQueryState('page', true)
   const postsToShow = usePageQuery("biographies", posts);
 
   return (
@@ -29,7 +29,7 @@ const Biographies: NextPage<Props> = ({ posts, pageCount, tags }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PostList label="Biographies" posts={postsToShow} tags={tags} />
-      <PagePicker pageCount={pageCount} setPage={setPage} />
+      <PagePicker pageCount={pageCount} setPage={pageParam.setValue} />
     </WideContainer>
   );
 };

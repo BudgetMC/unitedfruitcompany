@@ -1,9 +1,9 @@
-import { useQueryState } from "nuqs";
 import { useEffect, useRef, useState } from "react";
 import { ListedPost } from "../lib/types";
+import useQueryState from "./useQueryState";
 
 const usePageQuery = (category: string, initialPosts: ListedPost[]) => {
-  const [page] = useQueryState("page");
+  const { value } = useQueryState("page");
   const [posts, setPosts] = useState(initialPosts);
 
   const mountedRef = useRef(true);
@@ -24,14 +24,14 @@ const usePageQuery = (category: string, initialPosts: ListedPost[]) => {
       }
     };
 
-    if (page) {
-      if (page === "1") {
+    if (value) {
+      if (value === "1") {
         setPosts(initialPosts);
       } else {
-        getPosts(page.toString());
+        getPosts(value.toString());
       }
     }
-  }, [category, initialPosts, page]);
+  }, [category, initialPosts, value]);
 
   return posts;
 };

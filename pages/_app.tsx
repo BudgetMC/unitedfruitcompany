@@ -2,7 +2,6 @@ import type { AppProps } from "next/app";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NavOffset from "../components/NavOffset";
-import { NuqsAdapter } from "nuqs/adapters/next/pages";
 import '../styles/global.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -29,11 +28,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
   return (
     <>
-      <NuqsAdapter>
-        <Navbar />
-        <NavOffset child={<Component {...pageProps} />} />
-        <Footer />
-      </NuqsAdapter>
+      <Navbar />
+      <NavOffset child={<Component {...pageProps} />} />
+      <Footer />
     </>
   );
 }

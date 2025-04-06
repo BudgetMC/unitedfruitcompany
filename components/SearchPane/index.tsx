@@ -2,8 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import TagDisplay from "./TagDisplay";
 import { X } from "react-bootstrap-icons";
 import styles from './SearchPane.module.css';
-
-import { useQueryState } from "nuqs";
+import useQueryState from "../../hooks/useQueryState";
 
 interface Props {
   tags: string[];
@@ -12,19 +11,19 @@ interface Props {
 const PaneContent: React.FC<Props> = ({ tags }) => {
   // Keep the form value locally, and only dispatch a query to SearchPane on submit.
   const [searchValue, setSearchValue] = useState("");
-  const [query, setQuery] = useQueryState("search");
+  const searchParam = useQueryState('search');
 
   useEffect(() => {
-    if (query && query !== "") {
-      setSearchValue(query);
+    if (searchParam.value && searchParam.value !== "") {
+      setSearchValue(searchParam.value as string);
     }
-  }, [query]);
+  }, [searchParam.value]);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setQuery(searchValue);
+    searchParam.setValue(searchValue);
   };
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +32,7 @@ const PaneContent: React.FC<Props> = ({ tags }) => {
 
   const reset = () => {
     setSearchValue("");
-    setQuery("");
+    searchParam.setValue("");
   };
 
   const handleResetButton = () => {
@@ -75,7 +74,7 @@ const PaneContent: React.FC<Props> = ({ tags }) => {
             <TagDisplay
               tags={tags}
               defaultTagDisplay={true}
-              setQuery={setQuery}
+              setQuery={searchParam.setValue}
               setSearchValue={setSearchValue}
             />
           </div>
@@ -83,7 +82,7 @@ const PaneContent: React.FC<Props> = ({ tags }) => {
             <TagDisplay
               tags={tags}
               defaultTagDisplay={false}
-              setQuery={setQuery}
+              setQuery={searchParam.setValue}
               setSearchValue={setSearchValue}
             />
           </div>

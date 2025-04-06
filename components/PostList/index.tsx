@@ -4,8 +4,8 @@ import PostCard from "../PostCard";
 import SearchPane from "../SearchPane";
 import { ThreeDots } from "react-bootstrap-icons";
 import { useEffect, useRef, useState } from "react";
-import { useQueryState } from "nuqs";
 import styles from './PostList.module.css';
+import useQueryState from "../../hooks/useQueryState";
 
 interface Props {
   label: string; // e.g. "Biographies"
@@ -14,9 +14,9 @@ interface Props {
 }
 
 const PostList: React.FC<Props> = ({ label, posts, tags }) => {
+  const searchParam = useQueryState('search')
   const [displayedPosts, setDisplayedPosts] = useState(posts);
   const [loading, setLoading] = useState(false);
-  const [query] = useQueryState("search");
 
   const mountedRef = useRef(true);
 
@@ -31,11 +31,12 @@ const PostList: React.FC<Props> = ({ label, posts, tags }) => {
   useEffect(() => {
     const getPosts = async () => {
       setLoading(true);
-      const searchResponse = await fetch(`/api/${label}/search/${query}`);
+      const searchResponse = await fetch(`/api/${label}/search/${searchParam.value}`);
 
       const matchingPosts = await searchResponse.json();
 
       if (!mountedRef.current) {
+        setLoading(false);
         return null;
       }
 
@@ -43,12 +44,12 @@ const PostList: React.FC<Props> = ({ label, posts, tags }) => {
       setLoading(false);
     };
 
-    if (!query || query === "") {
+    if (!searchParam.value) {
       setDisplayedPosts(posts);
     } else {
       getPosts();
     }
-  }, [query, posts, label]);
+  }, [searchParam.value, posts, label]);
 
   const displayPosts = () => {
     if (loading) {
