@@ -8,7 +8,7 @@ const useQueryState = (name: string, isNumber?: boolean) => {
 
   const setValue = useCallback(
     (value: string | number) => {
-      const params = new URLSearchParams(searchParams.toString())
+      const params = new URLSearchParams(searchParams?.toString())
 
       if (value) {
         params.set(name, value.toString())
@@ -21,15 +21,17 @@ const useQueryState = (name: string, isNumber?: boolean) => {
         ? pathname + '?' + params.toString()
         : pathname
 
-      router.push(newPath, {
-        scroll: false
-      })
+      if (newPath) {
+        router.push(newPath, {
+          scroll: false
+        })
+      }
     },
     [name, searchParams]
   )
 
   const value = useMemo(() => {
-    const str = searchParams.get(name)
+    const str = searchParams?.get(name)
 
     if (str && isNumber) {
       return parseInt(str)

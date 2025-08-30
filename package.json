@@ -7,22 +7,20 @@
   "scripts": {
     "dev": "next dev",
     "build-only": "next build",
-    "make-sitemap": "next-sitemap --config ./next-sitemap.js",
-    "build": "next build && npm run make-sitemap",
+    "build": "next build",
     "start": "next start",
     "clearcache": "rm -R ./.cache"
   },
   "dependencies": {
     "html-entities": "^2.6.0",
-    "next": "^15.4.5",
+    "next": "^15.5.2",
     "react": "19.1.1",
     "react-bootstrap-icons": "^1.11.6",
     "react-dom": "19.1.1"
   },
   "devDependencies": {
-    "@types/node": "24.1.0",
-    "@types/react": "19.1.9",
-    "next-sitemap": "^4.2.3",
+    "@types/node": "24.3.0",
+    "@types/react": "19.1.12",
     "typescript": "5.9.2"
   }
 }
