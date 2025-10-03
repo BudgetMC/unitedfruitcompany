@@ -45,3 +45,6 @@ yarn-error.log*
 # Generated sitemaps
 sitemap.xml
 sitemap-0.xml
+
+# JetBrains config
+.idea
