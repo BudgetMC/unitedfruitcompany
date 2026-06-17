@@ -1,6 +1,8 @@
+'use client';
+
 import Link from "next/link";
 import { ArrowRight, ArrowLeft } from "react-bootstrap-icons";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { getUpperPath } from "../../lib/common";
 import styles from './Banner.module.css';
 
@@ -11,36 +13,33 @@ interface Props {
 }
 
 const Banner: React.FC<Props> = ({ header, previousSlug, nextSlug }) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <div className={styles.fullWidthContainer}>
       <div className={styles.containerContent}>
         <p className={styles.desktopNavLink}>
-          <Link href={`${getUpperPath(router.pathname)}/${previousSlug}`}>
+          <Link href={`${getUpperPath(pathname)}/${previousSlug}`}>
             Previous
           </Link>
         </p>
         <div className={styles.mobileNavLink}>
-          <Link
-            href={`${getUpperPath(router.pathname)}/${previousSlug}`}
-            passHref
-          >
+          <Link href={`${getUpperPath(pathname)}/${previousSlug}`} passHref>
             <ArrowLeft />
           </Link>
         </div>
         <p className={styles.header}>
-          <Link href={getUpperPath(router.pathname)} legacyBehavior>
+          <Link href={getUpperPath(pathname)}>
             {header}
           </Link>
         </p>
         <p className={styles.desktopNavLink}>
-          <Link href={`${getUpperPath(router.pathname)}/${nextSlug}`}>
+          <Link href={`${getUpperPath(pathname)}/${nextSlug}`}>
             Next
           </Link>
         </p>
         <div className={styles.mobileNavLink}>
-          <Link href={`${getUpperPath(router.pathname)}/${nextSlug}`} passHref>
+          <Link href={`${getUpperPath(pathname)}/${nextSlug}`} passHref>
             <ArrowRight />
           </Link>
         </div>

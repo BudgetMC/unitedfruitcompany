@@ -1,3 +1,5 @@
+'use client';
+
 import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import styles from './Image.module.css';
 

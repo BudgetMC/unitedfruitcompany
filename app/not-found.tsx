@@ -1,8 +1,7 @@
-import type { NextPage } from "next";
 import Link from "next/link";
 import styles from '../styles/404.module.css';
 
-const FourOhFour: NextPage = () => {
+export default function NotFound() {
   return (
     <div className={styles.fullPageContainer}>
       <div className={styles.fullPageContainerContent}>
@@ -17,6 +16,4 @@ const FourOhFour: NextPage = () => {
       </div>
     </div>
   );
-};
-
-export default FourOhFour;
+}
