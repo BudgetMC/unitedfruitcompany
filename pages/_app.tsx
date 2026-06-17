@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NavOffset from "../components/NavOffset";
+import { GoogleAnalytics } from '@next/third-parties/google'
 import '../styles/global.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Navbar />
       <NavOffset child={<Component {...pageProps} />} />
+      <GoogleAnalytics gaId="G-L9YS5VN7NZ" />
       <Footer />
     </>
   );
