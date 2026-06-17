@@ -48,3 +48,5 @@ sitemap-0.xml
 
 # JetBrains config
 .idea
+
+.claude
