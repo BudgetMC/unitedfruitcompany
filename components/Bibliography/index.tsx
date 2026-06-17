@@ -1,3 +1,5 @@
+'use client';
+
 import TypeWriterScript from "../../components/TypewriterScript";
 import BibliographyCard from "../BibliographyCard";
 import Container from "../Container";

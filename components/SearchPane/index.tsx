@@ -1,3 +1,5 @@
+'use client';
+
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import TagDisplay from "./TagDisplay";
 import { X } from "react-bootstrap-icons";

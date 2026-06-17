@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from "react";
 import { ListedPost } from "../../lib/types";
 import useScreenHeight from "../../hooks/useScreenHeight";

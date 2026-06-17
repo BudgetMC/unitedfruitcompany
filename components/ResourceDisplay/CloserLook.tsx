@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef } from "react";
 import Image from "../Image";
 import { XLg } from "react-bootstrap-icons";

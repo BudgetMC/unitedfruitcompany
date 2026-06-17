@@ -1,3 +1,5 @@
+'use client';
+
 import { ListedPost } from "../../lib/types";
 import TypewriterScript from "../TypewriterScript";
 import PostCard from "../PostCard";

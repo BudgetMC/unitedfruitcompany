@@ -1,6 +1,8 @@
+'use client';
+
 import Image from "../Image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { List, X } from "react-bootstrap-icons";
 import NavLinks from "./NavLinks";
@@ -9,12 +11,35 @@ import styles from './Navbar.module.css';
 const Navbar: React.FC = () => {
   const [displayDropdown, toggleDropdown] = useState(false);
 
-  const router = useRouter();
+  const pathname = usePathname();
 
-  // Close the mobile dropdown menu after the user clicks through to another page.
   useEffect(() => {
     toggleDropdown(false);
-  }, [router.pathname]);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      console.log(`
+            Hungry? Grab a banana!
+
+   _
+  //\\
+  V  \\
+   \\  \\_
+    \\,'.\`-.
+     |\\ \`. \`.
+     ( \\  \`. \`-.                        _,.-:\\
+      \\ \\   \`.  \`-._             __..--' ,-';/
+       \\ \`.   \`-.   \`-..___..---'   _.--' ,'/
+        \`. \`.    \`-._        __..--'    ,' /
+          \`. \`-_     \`\`--..''       _.-' ,'
+            \`-_ \`-.___        __,--'   ,'
+               \`-.__  \`----"""    __.-'
+  hh                \`--..____..--'
+
+    `);
+    }
+  }, []);
 
   const handleDropdownToggleIcon = () => {
     if (displayDropdown) {
@@ -25,8 +50,8 @@ const Navbar: React.FC = () => {
   };
 
   const backgroundStyle = useMemo(() => ({
-    backgroundColor: router.pathname === "/" ? "rgba(0, 0, 0, 0.6)" : "#3a3a3a"
-  }), [router.pathname])
+    backgroundColor: pathname === "/" ? "rgba(0, 0, 0, 0.6)" : "#3a3a3a"
+  }), [pathname]);
 
   return (
     <div

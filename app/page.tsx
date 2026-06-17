@@ -1,30 +1,22 @@
-import type { NextPage } from "next";
-import Head from "next/head";
+import type { Metadata } from "next";
 import TypewriterScript from "../components/TypewriterScript";
 import HomeGrid from "../components/HomeGrid";
 import Hero, { Side } from "../components/Hero";
 import styles from '../styles/Home.module.css';
 
-const Home: NextPage = () => {
+export const metadata: Metadata = {
+  title: "United Fruit Company",
+  description: "The United Fruit Company, 1899-1970.",
+};
+
+export default function Home() {
   return (
     <div>
-      <Head>
-        <title>United Fruit Company</title>
-        <meta
-          name="description"
-          content="The United Fruit Company, 1899-1970."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <div className={styles.mainContent}>
           <div className={styles.navbarPlaceholder} />
           <h1 className={styles.title}>
-            <TypewriterScript
-              text={"United Fruit Company"}
-              averageDuration={2000}
-            />
+            <TypewriterScript text={"United Fruit Company"} averageDuration={2000} />
           </h1>
 
           <p>
@@ -45,9 +37,7 @@ const Home: NextPage = () => {
 
       <Hero
         header="Timeline"
-        text={
-          "View our interactive timeline documenting the history of the United Fruit Company from its predecessors to its dissolution."
-        }
+        text="View our interactive timeline documenting the history of the United Fruit Company from its predecessors to its dissolution."
         picturePath="https://unitedfruitcompany.files.wordpress.com/2021/12/screenshot-2021-12-10-at-16-26-07-timeline-united-fruit-company.png?w=800"
         pictureAltText="Map of the United States, Mexico, and Central America published by the United Fruit Company."
         side={Side.Right}
@@ -63,6 +53,4 @@ const Home: NextPage = () => {
       />
     </div>
   );
-};
-
-export default Home;
+}

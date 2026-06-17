@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "react-bootstrap-icons";
 import styles from './ExpandableContent.module.css';

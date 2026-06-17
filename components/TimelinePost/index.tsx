@@ -1,13 +1,13 @@
-import { DisplayedPost } from "../../lib/types";
+import { DisplayedPost, ListedPost } from "../../lib/types";
 import PostCard from "../PostCard";
 import ExpandableContent from "./ExpandableContent";
 import styles from './TimelinePost.module.css';
 
 interface Props {
   post: DisplayedPost;
-  bios: DisplayedPost[];
-  docs: DisplayedPost[];
-  articles: DisplayedPost[];
+  bios: ListedPost[];
+  docs: ListedPost[];
+  articles: ListedPost[];
 }
 
 const TimelinePost: React.FC<Props> = ({ post, bios, docs, articles }) => {
