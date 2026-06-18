@@ -5,8 +5,8 @@ import Hero, { Side } from "../components/Hero";
 import styles from '../styles/Home.module.css';
 
 export const metadata: Metadata = {
-  title: "United Fruit Company",
-  description: "The United Fruit Company, 1899-1970.",
+  title: "United Fruit Company History Project",
+  description: "United Fruit Company biographies, documents, timeline, and more.",
 };
 
 export default function Home() {
