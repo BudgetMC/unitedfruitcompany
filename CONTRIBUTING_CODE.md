@@ -42,15 +42,15 @@ This site is hosted on Vercel, which has a 100 GB bandwidth limit. This is isn't
 
 Next.js and Vercel will constantly try to get you to use their `Image` component for faster speeds, etc. Ignore them. First of all, running our images through their optimizer means Vercel serves the images directly, meaning our bandwidth limit is used up a lot faster. Secondly, for loading speed improvements, Wordpress already offers very similar image optimization--it's just a bit hidden.
 
-Let's say we have an image: `https://unitedfruitcompany.files.wordpress.com/2021/11/senator_john_foster_dulles_r-ny.jpg`
+Let's say we have an image: `https://unitedfruitcompany.wordpress.com/wp-content/uploads/2021/11/senator_john_foster_dulles_r-ny.jpg`
 
 Hotlinking that URL directly will download an unoptimized JPG file. However, we can add `?w=600` at the end:
 
-`https://unitedfruitcompany.files.wordpress.com/2021/11/senator_john_foster_dulles_r-ny.jpg?w=600`
+`https://unitedfruitcompany.wordpress.com/wp-content/uploads/2021/11/senator_john_foster_dulles_r-ny.jpg?w=600`
 
 This 1) resizes the image to fit within the width limit (in this case 600px) and 2) converts the image to `webp` format for significant bandwidth savings.
 
-If the image is smaller than the width limit, Wordpress just sends the original size converted to webp. This is the case for the image above. We could also use `https://unitedfruitcompany.files.wordpress.com/2021/11/senator_john_foster_dulles_r-ny.jpg?w=20` to get a tiny image.
+If the image is smaller than the width limit, Wordpress just sends the original size converted to webp. This is the case for the image above. We could also use `https://unitedfruitcompany.wordpress.com/wp-content/uploads/2021/11/senator_john_foster_dulles_r-ny.jpg?w=20` to get a tiny image.
 
 With that in mind, try to avoid hotlinking an image without `w=x` at the end, where `x` is a number of pixels. This little Wordpress hack provides us with basically the same optimization that Vercel tries to sell without cutting into Vercel's bandwidth limit.
 

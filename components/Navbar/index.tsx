@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
         <div>
           <Link href="/" passHref>
             <Image
-              src="https://unitedfruitcompany.files.wordpress.com/2020/02/kurtz-phelan-600.jpg?w=200"
+              src="https://unitedfruitcompany.wordpress.com/wp-content/uploads/2020/02/kurtz-phelan-600.jpg?w=200"
               height="56"
               width="111"
               alt="Back to home"

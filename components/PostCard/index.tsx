@@ -13,7 +13,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
     } else {
       return (
         <img
-          src="https://unitedfruitcompany.files.wordpress.com/2020/02/kurtz-phelan-600.jpg?w=300"
+          src="https://unitedfruitcompany.wordpress.com/wp-content/uploads/2020/02/kurtz-phelan-600.jpg?w=300"
           alt={post.title}
         />
       );
