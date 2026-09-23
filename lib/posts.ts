@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import getPosts from "./cache";
 import { ListedPost, Post } from "./types";
 
@@ -70,8 +71,7 @@ export const getPageCount = async (category: string) => {
   );
 
   // 20 results per page, so we can do this little operation to get the page count
-  const pageCount = Math.floor(postsInCategory.length / 20) + 1;
-  return pageCount;
+  return Math.max(1, Math.ceil(postsInCategory.length / 20));
 };
 
 export const getSlugs = async (category: string) => {
@@ -160,15 +160,15 @@ export const getPostData = async (slug: string, category: string) => {
   const posts = await getCategory(category);
   const postIndex = posts.findIndex((p) => p.slug === slug);
 
+  if (postIndex === -1) {
+    notFound();
+  }
+
   const maxIndex = posts.length - 1;
 
   const post = posts[postIndex];
   const previousSlug = posts[getIndex(postIndex - 1, maxIndex)].slug;
   const nextSlug = posts[getIndex(postIndex + 1, maxIndex)].slug;
-
-  if (postIndex === -1) {
-    throw new Error("Oops, post doesn't exist.");
-  }
 
   return {
     ...post,

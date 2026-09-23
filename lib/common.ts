@@ -90,7 +90,7 @@ export const formatListedPosts = (posts: Post[]): ListedPost[] => {
     ID: post.ID,
     title: decode(post.title),
     date: post.date,
-    categories: post.categories,
+    categories: Object.keys(post.categories).map((c) => c.toLowerCase()),
     excerpt: post.excerpt,
     slug: post.slug,
     featured_image: post.featured_image ? post.featured_image : null,

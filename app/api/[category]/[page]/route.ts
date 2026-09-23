@@ -1,7 +1,5 @@
 import { getCategoryPage } from "../../../../lib/server";
 import { categories } from "../../../../lib/posts";
-import { formatListedPosts } from "../../../../lib/common";
-import { Post } from "../../../../lib/types";
 
 export async function GET(
   _request: Request,
@@ -18,10 +16,9 @@ export async function GET(
     return new Response(`${page} is not a valid page number.`, { status: 400 });
   }
 
-  const response = await getCategoryPage(category, pageNum);
-  const filteredPosts = formatListedPosts(response as Post[]);
+  const posts = await getCategoryPage(category, pageNum);
 
-  return Response.json(filteredPosts, {
+  return Response.json(posts, {
     headers: { 'Cache-Control': 's-maxage=86400' },
   });
 }

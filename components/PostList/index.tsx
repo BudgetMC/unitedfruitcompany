@@ -33,7 +33,7 @@ const PostList: React.FC<Props> = ({ label, posts, tags }) => {
   useEffect(() => {
     const getPosts = async () => {
       setLoading(true);
-      const searchResponse = await fetch(`/api/${label}/search/${searchParam.value}`);
+      const searchResponse = await fetch(`/api/${label}/search/${encodeURIComponent(searchParam.value as string)}`);
 
       const matchingPosts = await searchResponse.json();
 
