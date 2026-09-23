@@ -6,12 +6,23 @@ import path from "path";
 import { formatPosts, getPaginatedResponse } from "./common";
 import { Post } from "./types";
 
-const postsURL = `${process.env.POSTS_URL}/?number=100`;
-
 const cacheFolder = path.join(process.cwd(), ".cache");
 const cacheFile = path.join(cacheFolder, "posts");
 
-const getPosts = async () => {
+let postsPromise: Promise<Post[]> | null = null;
+
+const getPosts = () => {
+  if (!postsPromise) {
+    postsPromise = loadPosts().catch((e) => {
+      postsPromise = null;
+      throw e;
+    });
+  }
+
+  return postsPromise;
+};
+
+const loadPosts = async () => {
   const cachedPosts = getCachedPosts();
 
   if (cachedPosts) {
@@ -23,13 +34,15 @@ const getPosts = async () => {
 };
 
 const requestFromServer = async () => {
-  if (!postsURL) {
+  if (!process.env.POSTS_URL) {
     throw new Error("Missing post URL environment variable.");
   }
 
   console.log("Requesting posts from Wordpress API...");
 
-  const posts = await getPaginatedResponse(postsURL);
+  const posts = await getPaginatedResponse(
+    `${process.env.POSTS_URL}/?number=100`
+  );
 
   const formattedPosts = formatPosts(posts);
 

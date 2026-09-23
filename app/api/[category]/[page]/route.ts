@@ -18,6 +18,10 @@ export async function GET(
 
   const posts = await getCategoryPage(category, pageNum);
 
+  if ("error" in posts) {
+    return Response.json(posts, { status: 500 });
+  }
+
   return Response.json(posts, {
     headers: { 'Cache-Control': 's-maxage=86400' },
   });

@@ -25,8 +25,12 @@ export const getCategory = async (category: string) => {
 };
 
 export const getCategoryPage = async (category: string, page: number) => {
-  const posts = await getPage(`${postsURL}&category=${category}`, page);
-  return formatListedPosts(posts);
+  try {
+    const posts = await getPage(`${postsURL}&category=${category}`, page);
+    return formatListedPosts(posts);
+  } catch (e: any) {
+    return { error: e.message };
+  }
 };
 
 // Get posts from within a category that match a search query
@@ -35,7 +39,7 @@ export const searchCategory = async (category: string, query: string) => {
     const posts = await getPaginatedResponse(
       `${postsURL}&category=${category}&search=${encodeURIComponent(query)}`
     );
-    return formatPosts(posts);
+    return formatListedPosts(posts);
   } catch (e: any) {
     return { error: e.message };
   }
@@ -49,7 +53,7 @@ export const searchCategoryByTag = async (category: string, tag: string) => {
         tag.replace(/ /g, "-")
       )}`
     );
-    return formatPosts(posts);
+    return formatListedPosts(posts);
   } catch (e: any) {
     return { error: e.message };
   }
@@ -61,7 +65,7 @@ export const searchAll = async (query: string) => {
     const posts = await getPaginatedResponse(
       `${postsURL}&search=${encodeURIComponent(query)}`
     );
-    return formatPosts(posts);
+    return formatListedPosts(posts);
   } catch (e: any) {
     return { error: e.message };
   }

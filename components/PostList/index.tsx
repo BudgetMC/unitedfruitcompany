@@ -5,7 +5,7 @@ import TypewriterScript from "../TypewriterScript";
 import PostCard from "../PostCard";
 import SearchPane from "../SearchPane";
 import { ThreeDots } from "react-bootstrap-icons";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from './PostList.module.css';
 import useQueryState from "../../hooks/useQueryState";
 
@@ -19,38 +19,48 @@ const PostList: React.FC<Props> = ({ label, posts, tags }) => {
   const searchParam = useQueryState('search')
   const [displayedPosts, setDisplayedPosts] = useState(posts);
   const [loading, setLoading] = useState(false);
-
-  const mountedRef = useRef(true);
-
-  // Remember when it's unmounted so we can avoid trying to update
-  // state in the async call below.
-  useEffect(() => {
-    return () => {
-      mountedRef.current = false;
-    };
-  }, []);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const getPosts = async () => {
-      setLoading(true);
-      const searchResponse = await fetch(`/api/${label}/search/${encodeURIComponent(searchParam.value as string)}`);
-
-      const matchingPosts = await searchResponse.json();
-
-      if (!mountedRef.current) {
-        setLoading(false);
-        return null;
-      }
-
-      setDisplayedPosts(matchingPosts);
-      setLoading(false);
-    };
+    setError(false);
 
     if (!searchParam.value) {
       setDisplayedPosts(posts);
-    } else {
-      getPosts();
+      setLoading(false);
+      return;
     }
+
+    const controller = new AbortController();
+
+    const getPosts = async (query: string) => {
+      setLoading(true);
+
+      try {
+        const searchResponse = await fetch(
+          `/api/${label}/search/${encodeURIComponent(query)}`,
+          { signal: controller.signal }
+        );
+
+        if (!searchResponse.ok) {
+          throw new Error(`Search failed: ${searchResponse.status}`);
+        }
+
+        setDisplayedPosts((await searchResponse.json()) as ListedPost[]);
+      } catch (e) {
+        if (controller.signal.aborted) {
+          return;
+        }
+
+        console.error(e);
+        setError(true);
+      }
+
+      setLoading(false);
+    };
+
+    getPosts(searchParam.value as string);
+
+    return () => controller.abort();
   }, [searchParam.value, posts, label]);
 
   const displayPosts = () => {
@@ -59,6 +69,14 @@ const PostList: React.FC<Props> = ({ label, posts, tags }) => {
         <div className={styles.loadingIcon}>
           <ThreeDots />
         </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <p className={styles.error}>
+          Something went wrong. Please try again.
+        </p>
       );
     }
 

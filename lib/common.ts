@@ -3,11 +3,20 @@
 import { decode } from "html-entities";
 import { ListedPost, Post, Tags } from "./types";
 
+const fetchJSON = async (url: string) => {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`WordPress API returned ${response.status} for ${url}`);
+  }
+
+  return response.json();
+};
+
 export const getPage = async (url: string, page: number) => {
   console.log(`Getting single page ${page} from ${url}`);
 
-  const response = await fetch(`${url}&page=${page}`);
-  const json = await response.json();
+  const json = await fetchJSON(`${url}&page=${page}`);
 
   return json.posts as Post[];
 };
@@ -18,13 +27,12 @@ export const getPaginatedResponse = async (
 ): Promise<Post[]> => {
   console.log(`Getting ${`${url}&page=${page}`}`);
 
-  const response = await fetch(`${url}&page=${page}`);
-  const json = await response.json();
+  const json = await fetchJSON(`${url}&page=${page}`);
 
   let posts = json.posts as Post[];
 
   // Check if WP says there's another page
-  if (json.meta.next_page) {
+  if (json.meta?.next_page) {
     const nextPage = await getPaginatedResponse(url, page + 1);
     posts = posts.concat(nextPage);
   }

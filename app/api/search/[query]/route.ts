@@ -6,5 +6,9 @@ export async function GET(
 ) {
   const { query } = await params;
   const posts = await searchAll(query);
+
+  if ("error" in posts) {
+    return Response.json(posts, { status: 500 });
+  }
   return Response.json(posts);
 }

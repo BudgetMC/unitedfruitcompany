@@ -16,5 +16,9 @@ export async function GET(
     ? await searchCategoryByTag(category, query)
     : await searchCategory(category, query);
 
+  if ("error" in posts) {
+    return Response.json(posts, { status: 500 });
+  }
+
   return Response.json(posts);
 }
